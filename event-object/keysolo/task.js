@@ -17,6 +17,23 @@ class Game {
   }
 
   registerEvents() {
+    // Обработчик ввода символов
+    document.addEventListener('keydown', (e) => {
+      // Игнорируем служебные клавиши
+      if (e.ctrlKey || e.altKey || e.metaKey || e.key.length !== 1) {
+        return;
+      }
+
+      // Сравниваем символ без учёта регистра
+      const enteredChar = e.key.toLowerCase();
+      const currentChar = this.currentSymbol.textContent.toLowerCase();
+
+      if (enteredChar === currentChar) {
+        this.success();
+      } else {
+        this.fail();
+      }
+    });
     /*
       TODO:
       Написать обработчик события, который откликается
@@ -90,5 +107,5 @@ class Game {
   }
 }
 
-new Game(document.getElementById('game'))
+new Game(document.getElementById('game'));
 
